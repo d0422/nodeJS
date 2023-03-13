@@ -1,9 +1,9 @@
 const http = require('http');
 http
   .createServer((req, res) => {
-    res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' });
-    res.write('<h1>Hello World!</h1>');
-    res.end('<p>Hello Server</p>');
+    console.log(req.url, req.headers.cookie);
+    res.writeHead(200, { 'Set-Cookie': 'mycookie=test' });
+    res.end('Hello cookie');
   })
   .listen(8080, () => {
     console.log('8080포트로 서버를 열었습니다.');
