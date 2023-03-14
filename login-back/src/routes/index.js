@@ -1,16 +1,26 @@
 const express = require('express');
+const login = require('../SQL/login');
 const router = express.Router();
 
 router.get('/', (req, res) => {
   res.send('하이');
 });
 
-router.post('/', (req, res) => {
-  console.log(req.body);
+router.post('/', async (req, res) => {
   const response = {
     status: 200,
-    message: 'ok',
+    message: '로그인 성공',
   };
-  res.json(response);
+  const { id: reqId, pw: reqPW } = req.body;
+  const result = await login();
+  result.forEach((info) => {
+    const { id, pw } = info;
+    if (id === reqId && pw === reqPW) res.json(response);
+    else
+      res.status(401).json({
+        status: 401,
+        message: '로그인 실패',
+      });
+  });
 });
 module.exports = router;
