@@ -1,5 +1,7 @@
 const express = require('express');
 const cors = require('cors');
+const morgan = require('morgan');
+
 const app = express();
 app.set('port', 3000);
 app.use(
@@ -7,6 +9,7 @@ app.use(
     origin: '*',
   })
 );
+app.use(morgan('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.listen(app.get('port'), () => {
