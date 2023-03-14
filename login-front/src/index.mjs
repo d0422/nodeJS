@@ -15,5 +15,6 @@ button.addEventListener('click', async () => {
     },
     body: JSON.stringify(body),
   });
-  console.log(res);
+  const data = await res.json();
+  console.log(data);
 });
