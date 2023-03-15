@@ -1,5 +1,6 @@
 const express = require('express');
 const login = require('../SQL/login');
+const crypto = require('crypto');
 const router = express.Router();
 
 router.get('/', (req, res) => {
@@ -15,9 +16,12 @@ router.post('/', async (req, res) => {
   const result = await login();
   let success = false;
   result.forEach((info) => {
-    const { id, pw } = info;
-    console.log(id, pw);
-    if (id === reqId && pw === reqPW) res.json(response);
+    const { id, pw, salt } = info;
+    const compareHash = crypto
+      .createHash('sha-512')
+      .update(reqPW + salt)
+      .digest('hex');
+    if (id === reqId && pw === compareHash) res.json(response);
     success = true;
   });
   if (!success)
