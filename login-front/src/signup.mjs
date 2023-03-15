@@ -11,8 +11,12 @@ submit.addEventListener('click', async () => {
     age: age.value,
   };
   console.log(body);
-  //   const res = await fetch('http://localhost:3000/signup', {
-  //     body: JSON.stringify(body),
-  //   });
-  //   console.log(res);
+  const res = await fetch('http://localhost:3000/signup', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(body),
+  });
+  console.log(res);
 });
