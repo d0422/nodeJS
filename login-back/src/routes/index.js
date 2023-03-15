@@ -18,7 +18,7 @@ router.post('/', async (req, res) => {
   result.forEach((info) => {
     const { id, pw, salt } = info;
     const compareHash = crypto
-      .createHash('sha-512')
+      .createHash('sha512')
       .update(reqPW + salt)
       .digest('hex');
     if (id === reqId && pw === compareHash) res.json(response);
