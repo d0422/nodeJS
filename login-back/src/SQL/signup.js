@@ -7,7 +7,7 @@ const signup = async (id, pw, name, age) => {
     .update(pw + salt)
     .digest('hex');
   const connect = await connectMySQL();
-  const signupSQL = `INSERT INTO login_table(id,pw,name,age,salt) values('${id}', '${hasedPassword}', '${name}', '${age}',${salt})`;
+  const signupSQL = `INSERT INTO login_table(id,pw,name,age,salt) values('${id}', '${hasedPassword}', '${name}', '${age}','${salt}')`;
   connect.execute(signupSQL);
 };
 module.exports = signup;
