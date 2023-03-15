@@ -14,8 +14,11 @@ app.use(
 app.use(morgan('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
 app.listen(app.get('port'), () => {
   console.log(app.get('port'), '번 포트로 서버 ON');
 });
 const defaultRouter = require('./routes/index');
+const signupRouter = require('./routes/signup');
 app.use('/', defaultRouter);
+app.use('/signup', signupRouter);
