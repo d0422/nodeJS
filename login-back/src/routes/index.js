@@ -13,14 +13,17 @@ router.post('/', async (req, res) => {
   };
   const { id: reqId, pw: reqPW } = req.body;
   const result = await login();
+  let success = false;
   result.forEach((info) => {
     const { id, pw } = info;
+    console.log(id, pw);
     if (id === reqId && pw === reqPW) res.json(response);
-    else
-      res.status(401).json({
-        status: 401,
-        message: '로그인 실패',
-      });
+    success = true;
   });
+  if (!success)
+    res.status(401).json({
+      status: 401,
+      message: '로그인 실패',
+    });
 });
 module.exports = router;
