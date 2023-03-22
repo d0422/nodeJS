@@ -1,13 +1,32 @@
+import { useState } from 'react';
 import styled from 'styled-components';
 const Login = () => {
+  const [id, setId] = useState<string>();
+  const [password, setPassword] = useState<string>();
+  const onChangeId = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setId(e.target.value);
+  };
+  const onChangePassword = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setPassword(e.target.value);
+  };
   return (
     <Wrapper>
       <LoginWrapper>
         <Title>로그인하기</Title>
         <MainSection>
           <InputWrapper>
-            <Input type="text" placeholder="아이디" />
-            <Input type="password" placeholder="비밀번호" />
+            <Input
+              type="text"
+              placeholder="아이디"
+              value={id}
+              onChange={onChangeId}
+            />
+            <Input
+              type="password"
+              placeholder="비밀번호"
+              value={password}
+              onChange={onChangePassword}
+            />
           </InputWrapper>
           <LoginButton>Login</LoginButton>
         </MainSection>
