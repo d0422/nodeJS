@@ -1,13 +1,23 @@
 import { useState } from 'react';
 import styled from 'styled-components';
+import { ILoginPostBody, login } from '../api/login';
 const Login = () => {
-  const [id, setId] = useState<string>();
-  const [password, setPassword] = useState<string>();
+  const [id, setId] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
   const onChangeId = (e: React.ChangeEvent<HTMLInputElement>) => {
     setId(e.target.value);
   };
   const onChangePassword = (e: React.ChangeEvent<HTMLInputElement>) => {
+    console.log(e.target.value);
     setPassword(e.target.value);
+  };
+
+  const handleClick = () => {
+    const body: ILoginPostBody = {
+      id,
+      pw: password,
+    };
+    login(body);
   };
   return (
     <Wrapper>
@@ -28,7 +38,7 @@ const Login = () => {
               onChange={onChangePassword}
             />
           </InputWrapper>
-          <LoginButton>Login</LoginButton>
+          <LoginButton onClick={handleClick}>Login</LoginButton>
         </MainSection>
       </LoginWrapper>
     </Wrapper>
@@ -56,27 +66,25 @@ const LoginWrapper = styled.div`
 const Title = styled.div`
   font-size: 25px;
   padding-bottom: 25px;
-`;
-const Text = styled.div`
-  font-size: 20px;
+  font-weight: 700;
 `;
 const InputWrapper = styled.div`
   display: flex;
-  width: 60%;
+  width: 100%;
   align-items: center;
   flex-direction: column;
   gap: 10px;
 `;
 const Input = styled.input`
-  font-family: 'OTWelcomeRA';
-  font-size: 15px;
   width: 200px;
   height: 30px;
+  font-size: 15px;
   border-radius: 10px;
   border-style: none;
   padding: 10px;
   &::placeholder {
     color: lightgray;
+    font-weight: 700;
   }
 `;
 
