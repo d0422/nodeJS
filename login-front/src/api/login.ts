@@ -9,5 +9,8 @@ export const login = (body: ILoginPostBody) => {
       id: body.id,
       pw: body.pw,
     })
-    .then((res) => console.log(res));
+    .then((res) => console.log(res))
+    .catch((err) => {
+      if (err.response.status === 401) alert('ID 또는 PW가 잘못되었습니다.');
+    });
 };
