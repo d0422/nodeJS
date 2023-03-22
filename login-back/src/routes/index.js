@@ -21,13 +21,16 @@ router.post('/', async (req, res) => {
       .createHash('sha512')
       .update(reqPW + salt)
       .digest('hex');
-    if (id === reqId && pw === compareHash) res.json(response);
-    success = true;
+    if (id === reqId && pw === compareHash) {
+      res.json(response);
+      success = true;
+    }
   });
-  if (!success)
-    res.status(401).json({
+  if (!success) {
+    res.json({
       status: 401,
       message: '로그인 실패',
     });
+  }
 });
 module.exports = router;
