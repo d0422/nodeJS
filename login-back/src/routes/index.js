@@ -13,6 +13,7 @@ router.post('/', async (req, res) => {
     message: '로그인 성공',
   };
   const { id: reqId, pw: reqPW } = req.body;
+  console.log(req.body);
   const result = await login();
   let success = false;
   result.forEach((info) => {
@@ -27,10 +28,7 @@ router.post('/', async (req, res) => {
     }
   });
   if (!success) {
-    res.json({
-      status: 401,
-      message: '로그인 실패',
-    });
+    res.status(401).send('로그인 실패');
   }
 });
 module.exports = router;
