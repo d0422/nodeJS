@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { ILoginPostBody, login } from '../api/login';
 const Login = () => {
@@ -40,6 +41,9 @@ const Login = () => {
           </InputWrapper>
           <LoginButton onClick={handleClick}>Login</LoginButton>
         </MainSection>
+        <Link to={'/signup'}>
+          <SignUpButton>회원가입하기</SignUpButton>
+        </Link>
       </LoginWrapper>
     </Wrapper>
   );
@@ -104,4 +108,15 @@ const LoginButton = styled.div`
   align-items: center;
   justify-content: center;
 `;
+const SignUpButton = styled.div`
+  cursor: pointer;
+  margin-top: 20px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  color: grey;
+`;
+
 export default Login;
