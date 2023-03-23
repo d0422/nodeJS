@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const jwtAuth = require('../auth/jwtAuth');
+const profile = require('../SQL/profile');
 const verifyjwt = (req, res, next) => {
   const token = req.headers.authorization;
   if (!token) {
@@ -15,8 +16,10 @@ const verifyjwt = (req, res, next) => {
   }
 };
 
-router.get('/', verifyjwt, (req, res) => {
-  res.status(200).json({ id: req.user });
+router.get('/', verifyjwt, async (req, res) => {
+  const [result] = await profile(req.user);
+  console.log(result);
+  res.status(200).json(result);
 });
 
 module.exports = router;
