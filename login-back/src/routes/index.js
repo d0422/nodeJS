@@ -4,13 +4,8 @@ const crypto = require('crypto');
 const jwtMaker = require('../auth/jwtMaker');
 const router = express.Router();
 
-router.get('/', (req, res) => {
-  res.send('하이');
-});
-
 router.post('/', async (req, res) => {
   const { id: reqId, pw: reqPW } = req.body;
-  console.log(req.body);
   const result = await login();
   let success = false;
   result.forEach((info) => {
