@@ -20,5 +20,7 @@ app.listen(app.get('port'), () => {
 });
 const defaultRouter = require('./routes/index');
 const signupRouter = require('./routes/signup');
+const mypageRouter = require('./routes/mypage');
 app.use('/', defaultRouter);
 app.use('/signup', signupRouter);
+app.use('/mypage', mypageRouter);
