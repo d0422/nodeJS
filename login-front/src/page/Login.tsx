@@ -1,10 +1,15 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
+import { useSetRecoilState } from 'recoil';
 import { ILoginPostBody, login } from '../api/login';
+import access from '../atom/token';
 const Login = () => {
   const [id, setId] = useState<string>('');
   const [password, setPassword] = useState<string>('');
+  const setAccess = useSetRecoilState(access);
+  const navigate = useNavigate();
+
   const onChangeId = (e: React.ChangeEvent<HTMLInputElement>) => {
     setId(e.target.value);
   };
@@ -13,12 +18,21 @@ const Login = () => {
     setPassword(e.target.value);
   };
 
-  const handleClick = () => {
+  const handleClick = async () => {
     const body: ILoginPostBody = {
       id,
       pw: password,
     };
-    login(body);
+    try {
+      const response = await login(body);
+      if (response) {
+        const access_token = response.data.access_token;
+        setAccess(access_token);
+        navigate('/mypage');
+      }
+    } catch (err: any) {
+      if (err.response.status === 401) alert('ID 또는 PW가 잘못되었습니다.');
+    }
   };
   return (
     <Wrapper>
