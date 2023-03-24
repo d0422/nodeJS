@@ -23,6 +23,7 @@ const Mypage = () => {
   return (
     <Wrapper>
       <ProfileWrapper>
+        <Title>Mypage</Title>
         <Name>{data?.name} 님</Name>
         <Name>{data?.age} 세</Name>
       </ProfileWrapper>
@@ -42,7 +43,6 @@ const Wrapper = styled.div`
 `;
 const Name = styled.div`
   font-size: 30px;
-  font-weight: 700;
 `;
 const ProfileWrapper = styled.div`
   width: 400px;
@@ -53,4 +53,10 @@ const ProfileWrapper = styled.div`
   flex-direction: column;
   padding-top: 40px;
   font-family: 'OTWelcomeRA';
+`;
+
+const Title = styled.div`
+  font-size: 40px;
+  font-weight: 700;
+  margin-bottom: 30px;
 `;
