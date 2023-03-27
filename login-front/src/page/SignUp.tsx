@@ -5,7 +5,7 @@ const SignUp = () => {
   const [id, setId] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [name, setName] = useState<string>('');
-  const [age, setAge] = useState<number>(0);
+  const [age, setAge] = useState('');
   const onChangeId = (e: React.ChangeEvent<HTMLInputElement>) => {
     setId(e.target.value);
   };
@@ -17,7 +17,7 @@ const SignUp = () => {
     setName(e.target.value);
   };
   const onChangeAge = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setAge(parseInt(e.target.value));
+    setAge(e.target.value);
   };
   const handleClick = () => {
     signUp(id, password, name, age);
@@ -43,13 +43,13 @@ const SignUp = () => {
             <Input
               type="text"
               placeholder="이름"
-              value={id}
+              value={name}
               onChange={onChangeName}
             />
             <Input
-              type="text"
+              type="number"
               placeholder="나이"
-              value={id}
+              value={age}
               onChange={onChangeAge}
             />
           </InputWrapper>
