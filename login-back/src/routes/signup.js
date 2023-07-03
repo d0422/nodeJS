@@ -1,10 +1,10 @@
 const express = require('express');
 const signup = require('../SQL/signup');
 const router = express.Router();
-router.post('/', (req, res) => {
+router.post('/', async (req, res) => {
   const { id, pw, name, age } = req.body;
   try {
-    signup(id, pw, name, age);
+    await signup(id, pw, name, age);
     res.status(200).json({
       status: 200,
       message: '회원가입 성공',

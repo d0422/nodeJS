@@ -5,7 +5,7 @@ export interface ILoginPostBody {
 }
 export const login = (body: ILoginPostBody) => {
   return axios
-    .post('http://localhost:8080', {
+    .post('http://3.35.30.37:8080/', {
       id: body.id,
       pw: body.pw,
     })

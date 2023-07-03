@@ -18,9 +18,5 @@ app.use(express.urlencoded({ extended: true }));
 app.listen(app.get('port'), () => {
   console.log(app.get('port'), '번 포트로 서버 ON');
 });
-const defaultRouter = require('./routes/index');
-const signupRouter = require('./routes/signup');
-const mypageRouter = require('./routes/mypage');
-app.use('/', defaultRouter);
-app.use('/signup', signupRouter);
-app.use('/mypage', mypageRouter);
+const router = require('./routes/index');
+app.use(router);
